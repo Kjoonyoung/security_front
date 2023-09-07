@@ -1,10 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-// eslint-disable-next-line
-import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
 import { HiLockClosed } from 'react-icons/hi'
 import { SignUpApi } from '../api/SignUp';
+import { useDispatch } from 'react-redux';
 import { SET_USER_SIGNUP } from '../store/UserSignUp';
 
 import tw from 'twin.macro';
@@ -24,12 +23,12 @@ function SignUp() {
 
     // submit 이후 동작할 코드
     // 백으로 유저 정보 전달
-    const onValid = async ({ name, email, password, roles }) => {
+    const onValid = async ({ name, email, password }) => {
         await SignUpApi({ name, email, password })
         .then((res) => {
             if (res.status === 200) {
                 const userSignUp = { ...res.data }
-                dispatch(SET_USER_SIGNUP(userSignUp))
+                SET_USER_SIGNUP(userSignUp)
                 console.log(userSignUp)
 
                 return navigate('/login')
@@ -37,7 +36,7 @@ function SignUp() {
             console.log(res);
         })
         .catch((err)=>{
-            console.log("회원가입 실패입니다: ", err);
+            return navigate('/login')
         })
     };
 
