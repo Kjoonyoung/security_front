@@ -18,10 +18,10 @@ function App() {
 
             <Route path="/login" element={ <PublicRoute> <Login /> </PublicRoute> } />
             <Route path="/signUp" element={ <PublicRoute> <SignUp /> </PublicRoute> } />
-            
+
         </Routes>
       </Router>
   );
-}
+} 
 
 export default App;
