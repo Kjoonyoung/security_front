@@ -6,7 +6,6 @@ export const userSignUpSlice = createSlice({
         name: null,
         email: null,
         password: null,
-        roles: null
     },
     reducers:{
         SET_SIGNUP_USER: (state, action) => {
