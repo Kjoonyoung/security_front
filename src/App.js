@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
+import SignUp from './pages/SignUp';
 import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
 
@@ -19,7 +20,14 @@ function App() {
                    element={
                         <PublicRoute>
                             <Login />
-                        </PublicRoute>} />
+                        </PublicRoute>}
+                         />
+            <Route path="/signUp"
+                   element={
+                        <PublicRoute>
+                            <SignUp />
+                        </PublicRoute>}
+                         />
         </Routes>
       </Router>
   );
