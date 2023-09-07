@@ -16,18 +16,9 @@ function App() {
                 <Route path="/logout" element={<Logout />} />
             </Route>
 
-            <Route path="/login"
-                   element={
-                        <PublicRoute>
-                            <Login />
-                        </PublicRoute>}
-                         />
-            <Route path="/signUp"
-                   element={
-                        <PublicRoute>
-                            <SignUp />
-                        </PublicRoute>}
-                         />
+            <Route path="/login" element={ <PublicRoute> <Login /> </PublicRoute> } />
+            <Route path="/signUp" element={ <PublicRoute> <SignUp /> </PublicRoute> } />
+            
         </Routes>
       </Router>
   );
