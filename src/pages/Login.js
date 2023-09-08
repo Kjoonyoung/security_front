@@ -89,7 +89,7 @@ function Login() {
                                 </label>
                                 <Input
                                     {...register("email", {required: "Please Enter Your ID"})}
-                                    type="text"
+                                    type="email"
                                     placeholder="User ID"
                                 />
                                 <ErrorMessage
@@ -108,7 +108,7 @@ function Login() {
                                 </label>
                                 <Input
                                     {...register("password", {required: "Please Enter Your Password"})}
-                                    type="text"
+                                    type="password"
                                     placeholder="Password"
                                 />
                                 <ErrorMessage
