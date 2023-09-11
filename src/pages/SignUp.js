@@ -28,7 +28,7 @@ function SignUp() {
         .then((res) => {
             if (res.status === 200) {
                 const userSignUp = { ...res.data }
-                SET_USER_SIGNUP(userSignUp)
+                dispatch(SET_USER_SIGNUP(userSignUp))
                 console.log(userSignUp)
 
                 return navigate('/login')
