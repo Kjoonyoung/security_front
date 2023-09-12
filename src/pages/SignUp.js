@@ -21,8 +21,6 @@ function SignUp() {
     // useForm 사용을 위한 선언
     const { register, handleSubmit } = useForm();
 
-    // submit 이후 동작할 코드
-    // 백으로 유저 정보 전달
     const onValid = async ({ name, email, password }) => {
         await SignUpApi({ name, email, password })
         .then((res) => {
@@ -33,7 +31,6 @@ function SignUp() {
 
                 return navigate('/login')
             }
-            console.log(res);
         })
         .catch((err)=>{
             return navigate('/login')

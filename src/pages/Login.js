@@ -9,7 +9,7 @@ import { ErrorMessage } from '@hookform/error-message';
 //import { setRefreshToken } from '../storage/Cookie';
 import { SET_TOKEN } from '../store/Auth';
 import { SET_USER_INFO } from '../store/UserInfo';
-import { loginApi, checkApi } from '../api/Login';
+import { loginApi } from '../api/Login';
 import { useCookies } from 'react-cookie'
 
 import tw from 'twin.macro';
@@ -37,36 +37,19 @@ function Login() {
             if (res.status === 200) {
                 setCookie('Authorization', 'Bearer ' + res.data.token)
                 dispatch(SET_TOKEN(res.data.token))
-                console.log(res.data.token)
-                // const userInfo = {
-                //     email: res.data.email,
-                //     id: res.data.id,
-                //     name: res.data.name,
-                //     roles: res.data.roles
-                // }
                 const data = res.data
                 delete data.token;
                 const userInfo = { ...data }
                 dispatch(SET_USER_INFO(userInfo))
                 return navigate('/')
             }
-            console.log(res);
         })
         .catch((err)=>{
-            console.log("로그인 실패입니다: ", err);
+            alert("로그인 실패입니다. 다시 시도해주세요");
         })
     };
-    const check = async () => {
-        await checkApi()
-        .then((res) => {
-            if (res.status === 200) {
-                console.log("체크 성공")
-            }
-            console.log(res);
-        })
-        .catch((err) => {
-            console.log("로그인 실패입니다: ", err.response.message);
-        })
+    const signUp = async () => {
+        return navigate('/signUp')
     }
     return (
         <>
@@ -85,12 +68,12 @@ function Login() {
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
                                 <label htmlFor="email" className="sr-only">
-                                    User ID
+                                    User email
                                 </label>
                                 <Input
-                                    {...register("email", {required: "Please Enter Your ID"})}
+                                    {...register("email", {required: "Please Enter Your Email"})}
                                     type="email"
-                                    placeholder="User ID"
+                                    placeholder="User Email"
                                 />
                                 <ErrorMessage
                                     name="email"
@@ -109,10 +92,10 @@ function Login() {
                                 <Input
                                     {...register("password", {required: "Please Enter Your Password"})}
                                     type="password"
-                                    placeholder="Password"
+                                    placeholder=" User Password"
                                 />
                                 <ErrorMessage
-                                    name="email"
+                                    name="password"
                                     errors={errors}
                                     render={( { message }) =>
                                         <p className="text-sm font-medium text-rose-500">
@@ -137,12 +120,12 @@ function Login() {
                             <button
                                 type="button"
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                onClick={check}
+                                onClick={signUp}
                             >
                             <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                               <HiLockClosed className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                             </span>
-                                check
+                                signUp
                             </button>
                         </div>
                     </form>
