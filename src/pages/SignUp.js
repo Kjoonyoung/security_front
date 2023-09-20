@@ -29,14 +29,11 @@ function SignUp() {
                 dispatch(SET_USER_SIGNUP(userSignUp))
                 console.log(userSignUp)
 
-                return navigate('/login')
+                return navigate('/sign-in')
             }
         })
-        .catch((err)=>{
-            return navigate('/login')
-        })
     };
-
+    
     return (
         <>
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -64,12 +61,12 @@ function SignUp() {
                             </div>
                             <div>
                                 <label htmlFor="email" className="sr-only">
-                                    User ID
+                                    User Email
                                 </label>
                                 <Input
-                                    {...register("email", {required: "Please Enter Your ID"})}
-                                    type="text"
-                                    placeholder="User ID"
+                                    {...register("email", {required: "Please Enter Your Email"})}
+                                    type="email"
+                                    placeholder="User Email"
                                 />
                             </div>
                             <div>
@@ -91,10 +88,8 @@ function SignUp() {
                             <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                               <HiLockClosed className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                             </span>
-                                Sign Up
+                                회원가입
                             </button>
-                        </div>
-                        <div>
                         </div>
                     </form>
                 </div>
