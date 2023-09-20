@@ -9,7 +9,7 @@ import { ErrorMessage } from '@hookform/error-message';
 //import { setRefreshToken } from '../storage/Cookie';
 import { SET_TOKEN } from '../store/Auth';
 import { SET_USER_INFO } from '../store/UserInfo';
-import { loginApi } from '../api/Login';
+import { signInApi } from '../api/SignIn';
 import { useCookies } from 'react-cookie'
 
 import tw from 'twin.macro';
@@ -19,7 +19,7 @@ const Input = tw.input`
 `;
 
 
-function Login() {
+function SignIn() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     // eslint는 문법검사
@@ -32,7 +32,7 @@ function Login() {
     // submit 이후 동작할 코드
     // 백으로 유저 정보 전달
     const onValid = async ({ email, password }) => {
-        await loginApi({ email, password })
+        await signInApi({ email, password })
         .then((res) => {
             if (res.status === 200) {
                 setCookie('Authorization', 'Bearer ' + res.data.token)
@@ -40,6 +40,7 @@ function Login() {
                 const data = res.data
                 delete data.token;
                 const userInfo = { ...data }
+                alert(userInfo.name + "님 환영합니다.");
                 dispatch(SET_USER_INFO(userInfo))
                 return navigate('/')
             }
@@ -48,9 +49,7 @@ function Login() {
             alert("로그인 실패입니다. 다시 시도해주세요");
         })
     };
-    const signUp = async () => {
-        return navigate('/signUp')
-    }
+
     return (
         <>
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -116,18 +115,7 @@ function Login() {
                                 Sign in
                             </button>
                         </div>
-                        <div>
-                            <button
-                                type="button"
-                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                onClick={signUp}
-                            >
-                            <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                              <HiLockClosed className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
-                            </span>
-                                signUp
-                            </button>
-                        </div>
+
                     </form>
                 </div>
             </div>
@@ -135,4 +123,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default SignIn;

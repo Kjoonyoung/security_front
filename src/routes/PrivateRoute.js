@@ -1,9 +1,7 @@
-//
 import { Outlet, Navigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
 
-//
-import { CheckToken } from '../auth/CheckTokenl';
+import { CheckToken } from '../auth/CheckToken';
 import LoadingModal from '../component/LoadingModal';
 
 
@@ -13,7 +11,7 @@ export default function PrivateRoute() {
 
     if (isAuth === 'Failed') {
         return (
-            <Navigate to="/login" state={{from: location}}/>
+            <Navigate to="/sign-in" state={{from: location}}/>
         )
     } else if (isAuth==='Loading') {
         return <LoadingModal />

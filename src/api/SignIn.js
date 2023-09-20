@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 //api를 만들어줘야하는데
-export const loginApi = async (params) => {
+export const signInApi = async (params) => {
     return new Promise((resolve, reject)=>{
         axios.post('/api/user/sign-in', params)
         .then((res)=>{
